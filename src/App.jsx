@@ -17,7 +17,7 @@ function Hero() {
   return (
     <section className="px-6 py-24 text-center max-w-2xl mx-auto">
       <img
-        src="/src/assets/photo.jpg"
+        src="/src/assets/photo.png"
         alt="Charvi Chhatwal"
         className="w-32 h-32 rounded-full object-cover shadow-md mx-auto mb-8"
       />
