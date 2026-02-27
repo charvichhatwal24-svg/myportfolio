@@ -5,6 +5,7 @@ export default function App() {
         <Hero />
         <About />
         <Projects />
+        <Skills />
         <Links />
       </main>
       <Footer />
@@ -81,6 +82,46 @@ function Projects() {
           </li>
         ))}
       </ul>
+    </section>
+  )
+}
+
+const skills = [
+  {
+    category: 'Technical',
+    items: ['SQL', 'Python', 'Excel', 'Power BI', 'Tableau', 'SAP', 'Data Analysis', 'Process Optimization'],
+  },
+  {
+    category: 'Business',
+    items: ['Demand Planning', 'Supply Chain Management', 'Operations Strategy', 'P&L Ownership', 'Team Leadership', 'Cross-functional Collaboration'],
+  },
+  {
+    category: 'Languages',
+    items: ['English', 'Hindi'],
+  },
+]
+
+function Skills() {
+  return (
+    <section className="px-6 py-16 max-w-2xl mx-auto">
+      <h2 className="text-2xl font-semibold mb-8">Skills</h2>
+      <div className="flex flex-col gap-6">
+        {skills.map(({ category, items }) => (
+          <div key={category}>
+            <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wider mb-3">{category}</h3>
+            <ul className="flex flex-wrap gap-2">
+              {items.map((skill) => (
+                <li
+                  key={skill}
+                  className="px-3 py-1 rounded-full bg-gray-100 text-sm text-gray-700"
+                >
+                  {skill}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
     </section>
   )
 }
