@@ -1,14 +1,42 @@
+import { useEffect, useRef, useState } from 'react'
+
+function FadeIn({ children }) {
+  const ref = useRef(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true) },
+      { threshold: 0.1 }
+    )
+    if (el) observer.observe(el)
+    return () => { if (el) observer.unobserve(el) }
+  }, [])
+
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ease-out ${
+        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+      }`}
+    >
+      {children}
+    </div>
+  )
+}
+
 export default function App() {
   return (
     <div className="min-h-screen bg-white text-gray-900 flex flex-col">
       <main className="flex-1">
-        <Hero />
-        <About />
-        <Projects />
-        <Skills />
-        <Links />
+        <FadeIn><Hero /></FadeIn>
+        <FadeIn><About /></FadeIn>
+        <FadeIn><Projects /></FadeIn>
+        <FadeIn><Skills /></FadeIn>
+        <FadeIn><Links /></FadeIn>
       </main>
-      <Footer />
+      <FadeIn><Footer /></FadeIn>
     </div>
   )
 }
