@@ -65,7 +65,7 @@ function Hero() {
       <img
         src="/src/assets/photo.png"
         alt="Charvi Chhatwal"
-        className="w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover mx-auto mb-7 ring-4 ring-white shadow-md"
+        className="w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover object-top mx-auto mb-7 ring-4 ring-white shadow-md"
       />
       <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-stone-900 mb-3">
         Charvi Chhatwal
