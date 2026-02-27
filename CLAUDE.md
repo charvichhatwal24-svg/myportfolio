@@ -31,6 +31,11 @@ npm run build     # production build
 npm run preview   # preview production build locally
 ```
 
+## Workflow
+
+- **Never run `npm run dev`** — the user runs the dev server themselves in a separate terminal
+- To verify changes, run `npm run build` only
+
 ## Key Rules
 
 - Keep the site simple and fast — avoid adding unnecessary dependencies
