@@ -35,6 +35,7 @@ export default function App() {
         <FadeIn><Projects /></FadeIn>
         <FadeIn><Skills /></FadeIn>
         <FadeIn><Links /></FadeIn>
+        <FadeIn><Contact /></FadeIn>
       </main>
       <FadeIn><Footer /></FadeIn>
     </div>
@@ -176,6 +177,64 @@ function Links() {
           </li>
         ))}
       </ul>
+    </section>
+  )
+}
+
+function Contact() {
+  const [form, setForm] = useState({ name: '', email: '', message: '' })
+
+  function handleChange(e) {
+    setForm({ ...form, [e.target.name]: e.target.value })
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    const subject = encodeURIComponent(`Message from ${form.name}`)
+    const body = encodeURIComponent(`${form.message}\n\nFrom: ${form.name} (${form.email})`)
+    window.location.href = `mailto:cchhatwal@mba2027.hbs.edu?subject=${subject}&body=${body}`
+  }
+
+  const inputClass = 'w-full px-4 py-2 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-400 transition-colors'
+
+  return (
+    <section className="px-6 py-16 max-w-2xl mx-auto">
+      <h2 className="text-2xl font-semibold mb-6">Contact Me</h2>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <div>
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+          <input
+            id="name" name="name" type="text" required
+            value={form.name} onChange={handleChange}
+            placeholder="Your name"
+            className={inputClass}
+          />
+        </div>
+        <div>
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+          <input
+            id="email" name="email" type="email" required
+            value={form.email} onChange={handleChange}
+            placeholder="you@example.com"
+            className={inputClass}
+          />
+        </div>
+        <div>
+          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
+          <textarea
+            id="message" name="message" required rows={5}
+            value={form.message} onChange={handleChange}
+            placeholder="Your message..."
+            className={`${inputClass} resize-none`}
+          />
+        </div>
+        <button
+          type="submit"
+          className="self-start px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-700 transition-colors"
+        >
+          Send Message
+        </button>
+      </form>
     </section>
   )
 }
