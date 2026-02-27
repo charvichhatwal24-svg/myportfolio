@@ -14,6 +14,11 @@ export default function App() {
 function Hero() {
   return (
     <section className="px-6 py-24 text-center max-w-2xl mx-auto">
+      <img
+        src="/src/assets/photo.jpg"
+        alt="Charvi Chhatwal"
+        className="w-32 h-32 rounded-full object-cover shadow-md mx-auto mb-8"
+      />
       <h1 className="text-5xl font-bold tracking-tight mb-4">Charvi Chhatwal</h1>
       <p className="text-xl text-gray-500">MBA Candidate at Harvard Business School | Operations &amp; Supply Chain Leader</p>
     </section>
