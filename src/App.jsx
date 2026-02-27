@@ -26,9 +26,26 @@ function FadeIn({ children }) {
   )
 }
 
+// Shared layout primitives
+function Section({ children }) {
+  return (
+    <section className="px-6 py-16 max-w-2xl mx-auto border-t border-stone-100">
+      {children}
+    </section>
+  )
+}
+
+function SectionHeading({ children }) {
+  return (
+    <h2 className="text-xs font-semibold text-stone-400 uppercase tracking-widest mb-6">
+      {children}
+    </h2>
+  )
+}
+
 export default function App() {
   return (
-    <div className="min-h-screen bg-white text-gray-900 flex flex-col">
+    <div className="min-h-screen bg-stone-50 text-stone-900 flex flex-col">
       <main className="flex-1">
         <FadeIn><Hero /></FadeIn>
         <FadeIn><About /></FadeIn>
@@ -44,23 +61,29 @@ export default function App() {
 
 function Hero() {
   return (
-    <section className="px-6 py-24 text-center max-w-2xl mx-auto">
+    <section className="px-6 pt-24 pb-16 text-center max-w-2xl mx-auto">
       <img
         src="/src/assets/photo.png"
         alt="Charvi Chhatwal"
-        className="w-32 h-32 rounded-full object-cover shadow-md mx-auto mb-8"
+        className="w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover mx-auto mb-7 ring-4 ring-white shadow-md"
       />
-      <h1 className="text-5xl font-bold tracking-tight mb-4">Charvi Chhatwal</h1>
-      <p className="text-xl text-gray-500">MBA Candidate at Harvard Business School | Operations &amp; Supply Chain Leader</p>
+      <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-stone-900 mb-3">
+        Charvi Chhatwal
+      </h1>
+      <p className="text-base sm:text-lg text-stone-500 leading-relaxed max-w-md mx-auto">
+        MBA Candidate at Harvard Business School
+        <span className="mx-2 text-stone-300">·</span>
+        Operations &amp; Supply Chain Leader
+      </p>
     </section>
   )
 }
 
 function About() {
   return (
-    <section className="px-6 py-16 max-w-2xl mx-auto">
-      <h2 className="text-2xl font-semibold mb-4">About Me</h2>
-      <p className="text-gray-600 leading-relaxed">
+    <Section>
+      <SectionHeading>About Me</SectionHeading>
+      <p className="text-stone-600 leading-relaxed text-[15px]">
         I'm an MBA candidate at Harvard Business School with a background in operations,
         supply chain, and demand planning. Previously at Procter &amp; Gamble, I led demand
         planning for Beauty and Health &amp; Wellness categories, managing 10 direct reports
@@ -69,7 +92,7 @@ function About() {
         graduated Summa Cum Laude as a Stamps Scholar. I'm passionate about using data
         and technology to optimize operations and drive business impact.
       </p>
-    </section>
+    </Section>
   )
 }
 
@@ -98,20 +121,20 @@ const projects = [
 
 function Projects() {
   return (
-    <section className="px-6 py-16 max-w-2xl mx-auto">
-      <h2 className="text-2xl font-semibold mb-6">Projects</h2>
-      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <Section>
+      <SectionHeading>Projects</SectionHeading>
+      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {projects.map(({ title, description, href }) => (
-          <li key={title} className="border border-gray-200 rounded-lg p-5 flex flex-col gap-3 hover:border-gray-400 transition-colors">
-            <h3 className="font-semibold text-gray-900">{title}</h3>
-            <p className="text-sm text-gray-600 leading-relaxed flex-1">{description}</p>
-            <a href={href} className="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">
+          <li key={title} className="bg-white rounded-xl border border-stone-100 shadow-sm p-5 flex flex-col gap-2 hover:shadow-md transition-shadow duration-200">
+            <h3 className="font-semibold text-stone-900 text-sm">{title}</h3>
+            <p className="text-sm text-stone-500 leading-relaxed flex-1">{description}</p>
+            <a href={href} className="text-xs font-medium text-stone-400 hover:text-stone-700 transition-colors mt-1">
               View project →
             </a>
           </li>
         ))}
       </ul>
-    </section>
+    </Section>
   )
 }
 
@@ -132,18 +155,15 @@ const skills = [
 
 function Skills() {
   return (
-    <section className="px-6 py-16 max-w-2xl mx-auto">
-      <h2 className="text-2xl font-semibold mb-8">Skills</h2>
-      <div className="flex flex-col gap-6">
+    <Section>
+      <SectionHeading>Skills</SectionHeading>
+      <div className="flex flex-col gap-5">
         {skills.map(({ category, items }) => (
           <div key={category}>
-            <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wider mb-3">{category}</h3>
+            <p className="text-xs font-medium text-stone-400 uppercase tracking-widest mb-2.5">{category}</p>
             <ul className="flex flex-wrap gap-2">
               {items.map((skill) => (
-                <li
-                  key={skill}
-                  className="px-3 py-1 rounded-full bg-gray-100 text-sm text-gray-700"
-                >
+                <li key={skill} className="px-3 py-1 rounded-full bg-white border border-stone-200 text-xs font-medium text-stone-600">
                   {skill}
                 </li>
               ))}
@@ -151,7 +171,7 @@ function Skills() {
           </div>
         ))}
       </div>
-    </section>
+    </Section>
   )
 }
 
@@ -163,21 +183,21 @@ function Links() {
   ]
 
   return (
-    <section className="px-6 py-16 max-w-2xl mx-auto">
-      <h2 className="text-2xl font-semibold mb-6">Links</h2>
-      <ul className="flex flex-col sm:flex-row gap-4">
+    <Section>
+      <SectionHeading>Links</SectionHeading>
+      <ul className="flex flex-col sm:flex-row gap-3">
         {links.map(({ label, href }) => (
           <li key={label}>
             <a
               href={href}
-              className="inline-block px-6 py-3 rounded-lg border border-gray-200 text-gray-700 hover:border-gray-400 hover:text-gray-900 transition-colors"
+              className="inline-flex items-center gap-1 px-5 py-2.5 rounded-lg bg-white border border-stone-200 text-stone-700 text-sm font-medium shadow-sm hover:border-stone-400 hover:text-stone-900 transition-colors"
             >
-              {label}
+              {label} →
             </a>
           </li>
         ))}
       </ul>
-    </section>
+    </Section>
   )
 }
 
@@ -195,32 +215,34 @@ function Contact() {
     window.location.href = `mailto:cchhatwal@mba2027.hbs.edu?subject=${subject}&body=${body}`
   }
 
-  const inputClass = 'w-full px-4 py-2 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-400 transition-colors'
+  const inputClass = 'w-full px-4 py-2.5 bg-white border border-stone-200 rounded-lg text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-stone-900 focus:ring-offset-1 transition-shadow'
 
   return (
-    <section className="px-6 py-16 max-w-2xl mx-auto">
-      <h2 className="text-2xl font-semibold mb-6">Contact Me</h2>
+    <Section>
+      <SectionHeading>Contact Me</SectionHeading>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-          <input
-            id="name" name="name" type="text" required
-            value={form.name} onChange={handleChange}
-            placeholder="Your name"
-            className={inputClass}
-          />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label htmlFor="name" className="block text-xs font-medium text-stone-500 mb-1.5 uppercase tracking-wide">Name</label>
+            <input
+              id="name" name="name" type="text" required
+              value={form.name} onChange={handleChange}
+              placeholder="Your name"
+              className={inputClass}
+            />
+          </div>
+          <div>
+            <label htmlFor="email" className="block text-xs font-medium text-stone-500 mb-1.5 uppercase tracking-wide">Email</label>
+            <input
+              id="email" name="email" type="email" required
+              value={form.email} onChange={handleChange}
+              placeholder="you@example.com"
+              className={inputClass}
+            />
+          </div>
         </div>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-          <input
-            id="email" name="email" type="email" required
-            value={form.email} onChange={handleChange}
-            placeholder="you@example.com"
-            className={inputClass}
-          />
-        </div>
-        <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
+          <label htmlFor="message" className="block text-xs font-medium text-stone-500 mb-1.5 uppercase tracking-wide">Message</label>
           <textarea
             id="message" name="message" required rows={5}
             value={form.message} onChange={handleChange}
@@ -228,22 +250,24 @@ function Contact() {
             className={`${inputClass} resize-none`}
           />
         </div>
-        <button
-          type="submit"
-          className="self-start px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-700 transition-colors"
-        >
-          Send Message
-        </button>
+        <div>
+          <button
+            type="submit"
+            className="px-6 py-2.5 bg-stone-900 text-white text-sm font-medium rounded-lg hover:bg-stone-700 transition-colors"
+          >
+            Send Message
+          </button>
+        </div>
       </form>
-    </section>
+    </Section>
   )
 }
 
 function Footer() {
   const year = new Date().getFullYear()
   return (
-    <footer className="px-6 py-8 text-center text-sm text-gray-400 border-t border-gray-100">
-      &copy; {year} Charvi Chhatwal. All rights reserved.
+    <footer className="px-6 py-8 text-center text-xs text-stone-400 border-t border-stone-100">
+      &copy; {year} Charvi Chhatwal
     </footer>
   )
 }
