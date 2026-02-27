@@ -4,6 +4,7 @@ export default function App() {
       <main className="flex-1">
         <Hero />
         <About />
+        <Projects />
         <Links />
       </main>
       <Footer />
@@ -38,6 +39,48 @@ function About() {
         graduated Summa Cum Laude as a Stamps Scholar. I'm passionate about using data
         and technology to optimize operations and drive business impact.
       </p>
+    </section>
+  )
+}
+
+const projects = [
+  {
+    title: 'Project Title One',
+    description: 'Short description of what this project is, what problem it solves, and what technologies or methods were used.',
+    href: '#',
+  },
+  {
+    title: 'Project Title Two',
+    description: 'Short description of what this project is, what problem it solves, and what technologies or methods were used.',
+    href: '#',
+  },
+  {
+    title: 'Project Title Three',
+    description: 'Short description of what this project is, what problem it solves, and what technologies or methods were used.',
+    href: '#',
+  },
+  {
+    title: 'Project Title Four',
+    description: 'Short description of what this project is, what problem it solves, and what technologies or methods were used.',
+    href: '#',
+  },
+]
+
+function Projects() {
+  return (
+    <section className="px-6 py-16 max-w-2xl mx-auto">
+      <h2 className="text-2xl font-semibold mb-6">Projects</h2>
+      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {projects.map(({ title, description, href }) => (
+          <li key={title} className="border border-gray-200 rounded-lg p-5 flex flex-col gap-3 hover:border-gray-400 transition-colors">
+            <h3 className="font-semibold text-gray-900">{title}</h3>
+            <p className="text-sm text-gray-600 leading-relaxed flex-1">{description}</p>
+            <a href={href} className="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">
+              View project →
+            </a>
+          </li>
+        ))}
+      </ul>
     </section>
   )
 }
