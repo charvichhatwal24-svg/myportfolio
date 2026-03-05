@@ -97,7 +97,7 @@ function Landing({ setActive }) {
       <div className="flex flex-col sm:flex-row items-center sm:items-end gap-8 mb-10">
         <div className="shrink-0">
           <img
-            src="/src/assets/photo.png"
+            src="/photo.png"
             alt="Charvi Chhatwal"
             className="w-32 h-32 sm:w-36 sm:h-36 rounded-full object-cover object-top shadow-md"
           />
@@ -157,25 +157,25 @@ const projects = [
     title: 'Zera Food Composter — Design Optimization & Product Launch Readiness',
     description: 'Resolved a critical transmission failure risk during early-stage development, ensuring the product was commercially viable and launch-ready.',
     href: 'https://wlabsinnovations.com/pages/zera',
-    logo: '/src/assets/Zera.png',
+    logo: '/Zera.png',
   },
   {
     title: 'DermaPlanePro — New Product Launch',
     description: 'Led cross-functional team to launch P&G\'s first-ever dermaplaning device, managing an international supply chain from sourcing to shelf. Owned the end-to-end critical path schedule, coordinating across global teams to hit launch deadlines and deliver $5M in first-year sales.',
     href: 'https://www.bizjournals.com/cincinnati/news/2023/03/30/pg-venus-dermaplaning-line.html',
-    logo: '/src/assets/Derma.png',
+    logo: '/Derma.png',
   },
   {
     title: 'Native x Dunkin\' — Retail Launch & Media Strategy',
     description: 'Analyzed consumption and sales data across retail locations to inform media spend recommendations for the Native x Dunkin\' product launch at Target. Drove promotional strategy that optimized spend allocation and accelerated sell-through at shelf.',
     href: 'https://www.tiktok.com/@niylanicoleee/video/7455487826205920542',
-    logo: '/src/assets/Native.png',
+    logo: '/Native.png',
   },
   {
     title: 'Joy Razor — Walmart Exclusive Launch',
     description: 'Led the launch of Joy, a premium razor designed exclusively for Walmart shelves, managing the end-to-end product introduction into one of the world\'s largest retail environments. Managed shelf placement, order fulfillment, and stockouts during the critical conversion of SKUs.',
     href: 'https://www.walmart.com/ip/Joy-Neon-Pink-Razor-for-Women-Shave-Kit-with-1-handle-2-Razor-Blade-Refills-5-bladed/18145707051?classType=REGULAR&athbdg=L1200',
-    logo: '/src/assets/Joy.png',
+    logo: '/Joy.png',
   },
 ]
 
