@@ -211,7 +211,7 @@ const skills = [
   },
   {
     category: 'Ways of Working',
-    items: ['Cross-functional Leadership', 'Hardware & Physical Products', 'Operating in Unstructured Environments'],
+    items: ['Cross-functional Leadership', 'Operating in Unstructured Environments'],
   },
 ]
 
