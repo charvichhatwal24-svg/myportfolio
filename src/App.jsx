@@ -86,7 +86,6 @@ export default function App() {
         {active === 'skills' && <FadeIn><Skills setActive={setActive} /></FadeIn>}
         {active === 'contact' && <FadeIn><Contact setActive={setActive} /></FadeIn>}
       </main>
-      <Footer />
     </div>
   )
 }
@@ -113,7 +112,7 @@ function Landing({ setActive }) {
             Consumer Products Leader
           </p>
           <div className="mt-4 flex flex-wrap justify-center sm:justify-start gap-2">
-            {['P&G', 'Whirlpool', 'Tesla', 'HBS'].map((tag) => (
+            {['P&G', 'Tesla', 'Whirlpool'].map((tag) => (
               <span key={tag} className="px-2.5 py-0.5 rounded-md text-xs font-semibold bg-slate-900 text-white">
                 {tag}
               </span>
@@ -144,7 +143,6 @@ function Landing({ setActive }) {
         </div>
         <div className="mt-8 flex flex-wrap gap-3">
           <a href="https://www.linkedin.com/in/charvi-chhatwal-53652b169/" className="px-4 py-2 rounded-lg bg-slate-900 text-white text-sm font-medium hover:bg-slate-700 transition-colors shadow-sm">LinkedIn →</a>
-          <a href="mailto:cchhatwal@mba2027.hbs.edu" className="px-4 py-2 rounded-lg border border-slate-300 text-slate-700 text-sm font-medium hover:border-slate-500 hover:text-slate-900 transition-colors">Email →</a>
         </div>
       </div>
       <NextButton label="View Projects" target="projects" setActive={setActive} />
@@ -203,11 +201,11 @@ function Projects({ setActive }) {
 const skills = [
   {
     category: 'Core Skills',
-    items: ['Go-to-Market Strategy', 'Consumer Product Launch', 'Supply Chain Management', 'Retail Execution & Inventory Management', 'Business Development & Vendor Negotiations'],
+    items: ['Go-to-Market Strategy', 'Consumer Product Launch', 'Supply Chain Management', 'Retail Execution & Inventory Management', 'Business Development & Vendor Negotiations', 'Data Analysis & Insights', 'Demand Planning'],
   },
   {
     category: 'Analytics & Tools',
-    items: ['Data Analysis & Insights', 'Excel', 'Tableau', 'Power BI', 'Demand Planning'],
+    items: ['Excel', 'Tableau', 'Power BI'],
   },
   {
     category: 'Ways of Working',
@@ -332,11 +330,3 @@ function Contact({ setActive }) {
   )
 }
 
-function Footer() {
-  const year = new Date().getFullYear()
-  return (
-    <footer className="px-6 py-8 text-center text-xs text-slate-400 border-t border-slate-200">
-      &copy; {year} Charvi Chhatwal
-    </footer>
-  )
-}
