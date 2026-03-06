@@ -154,26 +154,26 @@ function Landing({ setActive }) {
 
 const projects = [
   {
-    title: 'Zera Food Composter — Design Optimization & Product Launch Readiness',
-    description: 'Resolved a critical transmission failure risk during early-stage development, ensuring the product was commercially viable and launch-ready.',
-    href: 'https://wlabsinnovations.com/pages/zera',
-    logo: '/Zera.png',
-  },
-  {
-    title: 'DermaPlanePro — New Product Launch',
-    description: 'Led cross-functional team to launch P&G\'s first-ever dermaplaning device, managing an international supply chain from sourcing to shelf. Owned the end-to-end critical path schedule, coordinating across global teams to hit launch deadlines and deliver $5M in first-year sales.',
-    href: 'https://www.bizjournals.com/cincinnati/news/2023/03/30/pg-venus-dermaplaning-line.html',
-    logo: '/Derma.png',
-  },
-  {
     title: 'Native x Dunkin\' — Retail Launch & Media Strategy',
-    description: 'Analyzed consumption and sales data across retail locations to inform media spend recommendations for the Native x Dunkin\' product launch at Target. Drove promotional strategy that optimized spend allocation and accelerated sell-through at shelf.',
+    description: 'Analyzed consumption and sales data across retail locations to inform media spend recommendations for the Native x Dunkin\' product launch at Target. Drove promotional strategy that optimized spend allocation and accelerated sell-through at shelf, delivering strong limited-series sales performance.',
     href: 'https://www.tiktok.com/@niylanicoleee/video/7455487826205920542',
     logo: '/Native.png',
   },
   {
+    title: 'DermaPlanePro — New Product Launch',
+    description: 'Led a cross-functional team to bring P&G\'s first-ever dermaplaning device to market, managing an international supply chain from sourcing to shelf. Owned the end-to-end critical path schedule, coordinating across global teams to hit launch deadlines and achieve strong first-year sales results.',
+    href: 'https://www.bizjournals.com/cincinnati/news/2023/03/30/pg-venus-dermaplaning-line.html',
+    logo: '/Derma.png',
+  },
+  {
+    title: 'Zera Food Composter — Design Optimization & Product Launch Readiness',
+    description: 'Resolved a critical transmission failure risk during early-stage development of Whirlpool\'s Zera Food Composter, ensuring the product was commercially viable and launch-ready. Delivered a solution that enabled successful adoption across thousands of households.',
+    href: 'https://wlabsinnovations.com/pages/zera',
+    logo: '/Zera.png',
+  },
+  {
     title: 'Joy Razor — Walmart Exclusive Launch',
-    description: 'Led the launch of Joy, a premium razor designed exclusively for Walmart shelves, managing the end-to-end product introduction into one of the world\'s largest retail environments. Managed shelf placement, order fulfillment, and stockouts during the critical conversion of SKUs.',
+    description: 'Reversed a two-year brand decline by leading the end-to-end launch of Joy, a premium razor exclusive to Walmart, delivering a 3% sales uplift and significant incremental revenue. Managed shelf placement, order fulfillment, and SKU conversion across one of the world\'s largest retail environments.',
     href: 'https://www.walmart.com/ip/Joy-Neon-Pink-Razor-for-Women-Shave-Kit-with-1-handle-2-Razor-Blade-Refills-5-bladed/18145707051?classType=REGULAR&athbdg=L1200',
     logo: '/Joy.png',
   },
@@ -240,16 +240,30 @@ function Skills({ setActive }) {
 
 function Contact({ setActive }) {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
+  const [status, setStatus] = useState(null) // 'sending' | 'success' | 'error'
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    const subject = encodeURIComponent(`Message from ${form.name}`)
-    const body = encodeURIComponent(`${form.message}\n\nFrom: ${form.name} (${form.email})`)
-    window.location.href = `mailto:cchhatwal@mba2027.hbs.edu?subject=${subject}&body=${body}`
+    setStatus('sending')
+    try {
+      const res = await fetch('https://formspree.io/f/xjgabqbp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (res.ok) {
+        setStatus('success')
+        setForm({ name: '', email: '', message: '' })
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      setStatus('error')
+    }
   }
 
   const inputClass = 'w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-1 transition-shadow'
@@ -257,45 +271,62 @@ function Contact({ setActive }) {
   return (
     <section className="px-6 py-20 max-w-2xl mx-auto">
       <SectionHeading>Contact Me</SectionHeading>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="name" className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wide">Name</label>
-            <input
-              id="name" name="name" type="text" required
-              value={form.name} onChange={handleChange}
-              placeholder="Your name"
-              className={inputClass}
-            />
-          </div>
-          <div>
-            <label htmlFor="email" className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wide">Email</label>
-            <input
-              id="email" name="email" type="email" required
-              value={form.email} onChange={handleChange}
-              placeholder="you@example.com"
-              className={inputClass}
-            />
-          </div>
-        </div>
-        <div>
-          <label htmlFor="message" className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wide">Message</label>
-          <textarea
-            id="message" name="message" required rows={5}
-            value={form.message} onChange={handleChange}
-            placeholder="Your message..."
-            className={`${inputClass} resize-none`}
-          />
-        </div>
-        <div>
+      {status === 'success' ? (
+        <div className="bg-white border border-slate-200 rounded-xl p-8 text-center shadow-sm">
+          <p className="text-slate-900 font-semibold mb-1">Message sent!</p>
+          <p className="text-slate-500 text-sm">Thanks for reaching out — I'll get back to you soon.</p>
           <button
-            type="submit"
-            className="px-6 py-2.5 bg-slate-900 text-white text-sm font-medium rounded-lg hover:bg-slate-700 transition-colors shadow-sm"
+            onClick={() => setStatus(null)}
+            className="mt-6 px-4 py-2 text-sm font-medium text-sky-500 hover:text-sky-700 transition-colors"
           >
-            Send Message
+            Send another message
           </button>
         </div>
-      </form>
+      ) : (
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="name" className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wide">Name</label>
+              <input
+                id="name" name="name" type="text" required
+                value={form.name} onChange={handleChange}
+                placeholder="Your name"
+                className={inputClass}
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wide">Email</label>
+              <input
+                id="email" name="email" type="email" required
+                value={form.email} onChange={handleChange}
+                placeholder="you@example.com"
+                className={inputClass}
+              />
+            </div>
+          </div>
+          <div>
+            <label htmlFor="message" className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wide">Message</label>
+            <textarea
+              id="message" name="message" required rows={5}
+              value={form.message} onChange={handleChange}
+              placeholder="Your message..."
+              className={`${inputClass} resize-none`}
+            />
+          </div>
+          {status === 'error' && (
+            <p className="text-sm text-red-500">Something went wrong — please try again or email me directly.</p>
+          )}
+          <div>
+            <button
+              type="submit"
+              disabled={status === 'sending'}
+              className="px-6 py-2.5 bg-slate-900 text-white text-sm font-medium rounded-lg hover:bg-slate-700 transition-colors shadow-sm disabled:opacity-60"
+            >
+              {status === 'sending' ? 'Sending…' : 'Send Message'}
+            </button>
+          </div>
+        </form>
+      )}
       <NextButton label="Back to Home" target={null} setActive={setActive} />
     </section>
   )
